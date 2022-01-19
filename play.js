@@ -13,24 +13,31 @@ const connect = function () {
 
   conn.on('connect', () => {
     console.log("Successfully connected to game server");
-    moving();
   })
 
   conn.write('Name: GLB');
-  const moving = () => {
-
-    // for (let arg = 0; arg < 2500; arg += 50) {
-    //   setTimeout( function moveUp() {
-    //     conn.write('Move: up');
-    //   }, arg);
-    // }
-  }
     
   conn.setEncoding("utf8");
 
   return conn;
 };
 
+const setupInput = function () {
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.setEncoding("utf8");
+  stdin.resume();
+  stdin.on("data", handleUserInput);
+  return stdin;
+};
+
+const handleUserInput = function (key) {
+  if (key === '\u0003') {
+    process.exit();
+  }
+};
+
+
 console.log("Connecting ...");
 
-module.exports = connect;
+module.exports = [connect, setupInput];
