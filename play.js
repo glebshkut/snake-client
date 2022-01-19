@@ -4,5 +4,5 @@ const connect = require('./client');
 
 console.log("Connecting ...");
 
-connect();
-setupInput();
+const res = connect();
+setupInput(res);
