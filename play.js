@@ -13,10 +13,19 @@ const connect = function () {
 
   conn.on('connect', () => {
     console.log("Successfully connected to game server");
+    moving();
   })
 
   conn.write('Name: GLB');
+  const moving = () => {
 
+    // for (let arg = 0; arg < 2500; arg += 50) {
+    //   setTimeout( function moveUp() {
+    //     conn.write('Move: up');
+    //   }, arg);
+    // }
+  }
+    
   conn.setEncoding("utf8");
 
   return conn;
